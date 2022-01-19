@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 notebook = "*"
 statsmodels = "*"
+makefile-help = "*"
 
 [dev-packages]
 

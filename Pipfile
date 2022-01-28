@@ -7,6 +7,8 @@ name = "pypi"
 notebook = "*"
 statsmodels = "*"
 makefile-help = "*"
+pandas = "*"
+xlrd = "*"
 
 [dev-packages]
 

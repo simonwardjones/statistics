@@ -9,6 +9,9 @@ statsmodels = "*"
 makefile-help = "*"
 pandas = "*"
 xlrd = "*"
+plotly = "*"
+ipywidgets = "*"
+autopep8 = "*"
 
 [dev-packages]
 

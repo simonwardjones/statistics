@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "statisitics"
+version = "0.1.0"
+description = ""
+authors = ["simonwardjones <simon.ward-jones@deliveroo.co.uk>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+autopep8 = "*"
+ipywidgets = "*"
+makefile-help = "*"
+networkx = "*"
+notebook = "*"
+pandas = "*"
+plotly = "*"
+statsmodels = "*"
+xlrd = "*"
+black = "*"
+matplotlib = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

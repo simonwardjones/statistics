@@ -19,6 +19,7 @@ statsmodels = "*"
 xlrd = "*"
 black = "*"
 matplotlib = "*"
+kaleido = "0.2.1"
 
 
 [build-system]

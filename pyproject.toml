@@ -4,6 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["simonwardjones <simon.ward-jones@deliveroo.co.uk>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -20,7 +21,7 @@ xlrd = "*"
 black = "*"
 matplotlib = "*"
 kaleido = "0.2.1"
-
+pyarrow = "*"
 
 [build-system]
 requires = ["poetry-core"]

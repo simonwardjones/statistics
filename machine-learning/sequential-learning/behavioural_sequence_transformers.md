@@ -19,14 +19,14 @@ We start with a vocabulary of size $|V|$, where each element represents a unique
 
 The embedding matrix $W \in \mathbb{R}^{|V| \times d_m}$ maps from one-hot encoded items to dense embedding vectors:
 
-$$
+```math
 W = \begin{pmatrix}
 - & w^1 & - & \quad \text{item 1 embedding weights} \\
 - & w^2 & - & \quad \text{item 2 embedding weights} \\
 & \vdots & \\
 - & w^{|V|} & - & \quad \text{item |V| embedding weights}
 \end{pmatrix} \quad \in \mathbb{R}^{|V| \times d_m}
-$$
+```
 
 ### Computing Item Embeddings
 

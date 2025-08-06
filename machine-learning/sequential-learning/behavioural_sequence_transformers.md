@@ -18,16 +18,13 @@ We start with a vocabulary of size $|V|$, where each element represents a unique
 ### Item Embedding Matrix
 
 The embedding matrix $W \in \mathbb{R}^{|V| \times d_m}$ maps from one-hot encoded items to dense embedding vectors:
-- Input dimension: $|V|$ (vocabulary size)
-- Output dimension: $d_m$ (embedding dimension)
-- Each row $v^i$ represents the embedding weights for item $i$
 
 $$
 W = \begin{pmatrix}
-- & v^1 & - & \quad \text{item 1 embedding weights} \\
-- & v^2 & - & \quad \text{item 2 embedding weights} \\
+- & w^1 & - & \quad \text{item 1 embedding weights} \\
+- & w^2 & - & \quad \text{item 2 embedding weights} \\
 & \vdots & \\
-- & v^{|V|} & - & \quad \text{item |V| embedding weights}
+- & w^{|V|} & - & \quad \text{item |V| embedding weights}
 \end{pmatrix} \quad \in \mathbb{R}^{|V| \times d_m}
 $$
 

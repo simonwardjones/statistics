@@ -285,9 +285,9 @@ graph TD
             E_in --> WV
 
             subgraph heads["Attention Head i (i=1..h)"]
-                WK(["$$\text{Key Projection } W^K$$"])
-                WQ(["$$\text{Query Projection } W^Q$$"])
-                WV(["$$\text{Value Projection } W^V$$"])
+                WK(["$$\\text{Key Projection } W^K$$"])
+                WQ(["$$\\text{Query Projection } W^Q$$"])
+                WV(["$$\\text{Value Projection } W^V$$"])
 
                 %% Improved styling
                 style WK fill:#2c3e50,stroke:#000000,stroke-width:3px,color:#ffffff,font-weight:bold

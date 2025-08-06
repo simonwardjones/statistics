@@ -285,36 +285,36 @@ graph TD
             E_in --> WV
 
             subgraph heads["Attention Head i (i=1..h)"]
-                WQ(["$$\text{Query Projection } W^Q$$"])
-                WK(["$$\text{Key Projection } W^K$$"])
-                WV(["$$\text{Value Projection } W^V$$"])
+                WQ(["Query Projection WQ"])
+                WK(["Key Projection WK"])
+                WV(["Value Projection WV"])
 
                 %% Improved styling
                 style WK fill:#2c3e50,stroke:#000000,stroke-width:3px,color:#ffffff,font-weight:bold
                 style WQ fill:#2980b9,stroke:#000000,stroke-width:3px,color:#ffffff,font-weight:bold
                 style WV fill:#27ae60,stroke:#000000,stroke-width:3px,color:#ffffff,font-weight:bold
 
-                WK --> Ki["$$\text{Keys } K_i \quad (n × d_k)$$"]
-                WQ --> Qi["$$\text{Queries } Q_i \quad (n × d_k)$$"]
-                WV --> Vi["$$\text{Values } V_i \quad (n × d_v)$$"]
+                WK --> Ki["Keys K (n × d_k)"]
+                WQ --> Qi["Queries Q (n × d_k)"]
+                WV --> Vi["Values V (n × d_v)"]
 
-                Attention["$$\text{Scaled Dot-Product Attention } S = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \quad (n × d_v)$$"]
+                Attention["Scaled Dot-Product Attention<br> S = Softmax(QK^T/sqrt(d_k))V"]
                 style Attention fill:#8e44ad,stroke:#000000,stroke-width:2px,color:#ffffff
 
                 Qi --> Attention
                 Ki --> Attention
                 Vi --> Attention
 
-                Attention --> h_i["$$\text{Head Output } h_i \quad (n × d_v)$$"]
+                Attention --> h_i["Head Output h_i (n × d_v)"]
             end
 
-            Concatenate["$$\text{Concatenate } H = [h_1|...|h_h] \quad (n, d_v \times h)$$"]
+            Concatenate["Concatenate H = [h_1|...|h_h]  (n, d_v \times h)"]
 
-            OutputProjection(["$$\text{Output Projection } W^H$$"])
+            OutputProjection(["Output Projection  WH"])
             style OutputProjection fill:#c0392b,stroke:#000000,stroke-width:2px,color:#ffffff
 
             h_i --> Concatenate
-            Concatenate --> Output["$$\text{Output } S = H W^H \quad (n, d_m)$$"]
+            Concatenate --> Output["S = H W^H (n, d_m)"]
             OutputProjection --> Output
     end
 ```
@@ -358,21 +358,21 @@ graph TD
 The full BST has the sequential click embeddings $E$ as described above that are passed through the transformer layer.
 These are then concatenated with other features such as user information and then passed through an MLP and finally to a signmoid to predict the probability of the next item being clicked. Note the final item in the sequence is the item we are seeking a prediction for.
 
-:::mermaid
+```mermaid
 graph TD
-    inputEmbeddings["$$Input Embeddings ~(n, d_m)$$"]
-    OtherInputs["Other Inputs $$~(1,d_o)$$"]
-    TransformerLayer["Transformer Layer $$~(n, d_m)$$"]
-    Concatenate["Concatenate $$~(1, n \times d_m + d_o)$$"]
-    MLP["MLP $$~(1, \text{n nodes in final mlp layer})$$"]
-    Sigmoid["Sigmoid $$~(1, 1)$$"]
+    inputEmbeddings["Input Embeddings (n, d_m)"]
+    OtherInputs["Other Inputs (1,d_o)"]
+    TransformerLayer["Transformer Layer (n, d_m)"]
+    Concatenate["Concatenate<br>(1, n * d_m + d_o)"]
+    MLP["MLP (1, n nodes in final mlp layer)"]
+    Sigmoid["Sigmoid (1, 1)"]
 
     inputEmbeddings --> TransformerLayer
     TransformerLayer --> Concatenate
     OtherInputs --> Concatenate
     Concatenate --> MLP
     MLP --> Sigmoid
-:::
+```
 
 ## Summary and Key Points
 

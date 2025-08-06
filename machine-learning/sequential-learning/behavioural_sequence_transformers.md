@@ -358,7 +358,7 @@ graph TD
 The full BST has the sequential click embeddings $E$ as described above that are passed through the transformer layer.
 These are then concatenated with other features such as user information and then passed through an MLP and finally to a signmoid to predict the probability of the next item being clicked. Note the final item in the sequence is the item we are seeking a prediction for.
 
-```mermaid
+:::mermaid
 graph TD
     inputEmbeddings["$$Input Embeddings ~(n, d_m)$$"]
     OtherInputs["Other Inputs $$~(1,d_o)$$"]
@@ -372,7 +372,7 @@ graph TD
     OtherInputs --> Concatenate
     Concatenate --> MLP
     MLP --> Sigmoid
-```
+:::
 
 ## Summary and Key Points
 

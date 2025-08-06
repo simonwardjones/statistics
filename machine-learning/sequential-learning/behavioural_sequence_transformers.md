@@ -32,11 +32,11 @@ W = \begin{pmatrix}
 
 For any item $i$, represented as a one-hot vector $v^i = (0,...,1,...,0) \in \mathbb{R}^{|V|}$, its embedding $e^i$ is computed as:
 
-$$
+```math
 \begin{aligned}
 e^i = v^i W \quad \text{where} \quad (1, d_m) = (1, |V|) \ @ \ (|V|, d_m)
 \end{aligned}
-$$
+```
 
 This matrix multiplication effectively selects the $i$-th row of $W$ as the item's embedding vector.
 ## Sequence Modeling
@@ -48,7 +48,7 @@ For a user's interaction sequence of length $n$, we construct a sequence embeddi
 - The subscript $t$ indicates temporal position (unlike superscript $i$ which indicated vocabulary index)
 - Shape $(n, d_m)$ where $n$ is sequence length and $d_m$ is embedding dimension
 
-$$
+```math
 \begin{aligned}
 E = \begin{pmatrix}
 - & e_1 & - & \quad \text{first item embedding} \\
@@ -57,7 +57,7 @@ E = \begin{pmatrix}
 - & e_n & - & \quad \text{last item embedding}
 \end{pmatrix} \quad \in \mathbb{R}^{n \times d_m}
 \end{aligned}
-$$
+```
 ### Positional Encoding
 
 To incorporate sequential order information, we add positional encodings to the embeddings. These encodings are designed to:
@@ -67,12 +67,12 @@ To incorporate sequential order information, we add positional encodings to the 
 
 In the original [Attention is all you need paper](https://arxiv.org/pdf/1706.03762) the positional encoding for position $pos$ and dimension $i$ is computed as:
 
-$$
+```math
 \begin{aligned}
 PE(pos, 2i) &= \sin(pos/10000^{2i/d}) & \text{for even dimensions} \\
 PE(pos, 2i+1) &= \cos(pos/10000^{2i/d}) & \text{for odd dimensions}
 \end{aligned}
-$$
+```
 
 This creates a positional encoding matrix $PE \in \mathbb{R}^{n \times d_m}$:
 
@@ -105,7 +105,7 @@ First, let's look at the Query and Key projections:
 - $W^K \in \mathbb{R}^{d_m \times d_k}$: Projects embeddings into "key" space
 - $d_k$: Dimension of the query/key space (typically smaller than $d_m$)
 
-$$
+```math
 \begin{aligned}
 \underbrace{
 \begin{pmatrix}
@@ -137,10 +137,10 @@ e_n w_1^Q & \cdots & e_n w_{d_k}^Q
 \end{pmatrix}
 }_{Q \ (n, d_k)}
 \end{aligned}
-$$
+```
 The rows of $Q$ are the queries for the $n$ items. The columns of $W^Q$ are known as "feature detectors" or "perspective filters".
 
-$$
+```math
 \begin{aligned}
 \underbrace{
 \begin{pmatrix}
@@ -172,7 +172,7 @@ e_n w_1^K & \cdots & e_n w_{d_k}^K
 \end{pmatrix}
 }_{K \ (n, d_k)}
 \end{aligned}
-$$
+```
 The rows of $K$ are the keys for the $n$ items. The columns of $W^K$ are known as "feature signatures" or "contextual labels".
 
 The matrix $W^Q$ projects the original features into a "query" or "seeking" representation, while $W^K$ projects them into a "key" or "offering" representation. These two matrices, $W^Q$ and $W^K$, are learned together so that the model can map features into a shared space: one side formulates questions (queries), and the other provides possible matches (keys). This shared space enables the model to determine how relevant each item is to the others.
@@ -181,7 +181,7 @@ The `Query` and `Key` components of attention determine, for each item, which ot
 
 Just like Q and K the value vectors are calculated by a projection matrix $W^V$ with shape $(d_m, d_v)$ where $d_v$ is the value dimension.
 
-$$
+```math
 \begin{aligned}
 \underbrace{
 \begin{pmatrix}
@@ -207,21 +207,21 @@ w_1^V & \cdots & w_{d_v}^V \\
 \end{pmatrix}
 }_{V \ (n, d_v)}
 \end{aligned}
-$$
+```
 The rows of $V$ are the values.
 
 Now with Q, K and V
-$$
+```math
 \begin{aligned}
 \text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 \end{aligned}
-$$
+```
 Note: the Softmax is applied to each row independently. So if $QK_i$ is the ith row of $\frac{QK^T}{\sqrt{d_k}}$ then the softmax is applied to it as
-$$
+```math
 \begin{aligned}
 \text{Softmax}(QK_i) = \frac{\exp(QK_i)}{\sum_{j=1}^n \exp(QK_{ij})}
 \end{aligned}
-$$
+```
 where $QK_i$ is the ith row of $\frac{QK^T}{\sqrt{d_k}}$.
 
 
@@ -229,11 +229,11 @@ where $QK_i$ is the ith row of $\frac{QK^T}{\sqrt{d_k}}$.
 ## Multi-head self-attention
 
 In multi-head attention:
-$$
+```math
 \begin{aligned}
 S = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^H
 \end{aligned}
-$$
+```
 Where $\text{head}_i = \text{Attention}(EW_i^Q, EW_i^K, EW_i^V)$, with shape $(n, d_v)$.
 Concatenating the heads to $H = (h_1 | h_2 | ... | h_h)$ results in shape $(n, d_v \times h)$. We then multiply this by $W^H$ of shape $(d_v \times h, d_m)$. S has shape $(n, d_m)$, same as E.
 
@@ -241,7 +241,7 @@ Concatenating the heads to $H = (h_1 | h_2 | ... | h_h)$ results in shape $(n, d
 
 Now S has the new representation of all n embeddings after self attention. A point-wise Feed Forward network is applied. The point-wise means the exact same Feed Forward network is applied to each row of S.
 
-$$
+```math
 \begin{aligned}
 S =
 \begin{pmatrix}
@@ -256,16 +256,16 @@ S =
 \text{FFN}(s_n)
 \end{pmatrix}
 \end{aligned}
-$$
+```
 
 However in practise the paper actually uses a residual connection to the input embeddings as well as appling a layer norm before the FFN and after the FFN.
 
-$$
+```math
 \begin{aligned}
 S' &= \text{LayerNorm}(E + \text{dropout}(\text{MH}(E))) \\
 F &= \text{LayerNorm}(S' + \text{dropout}(\text{LeakyRelu}(S'W^{[1]} + b^{[1]}))W^{[2]} + b^{[2]})
 \end{aligned}
-$$
+```
 where $MH(E) = S$ is the output of the multi-head self-attention layer.
 
 ## Architecture Diagrams

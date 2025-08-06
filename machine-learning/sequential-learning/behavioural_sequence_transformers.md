@@ -23,14 +23,12 @@ The embedding matrix $W \in \mathbb{R}^{|V| \times d_m}$ maps from one-hot encod
 - Each row $v^i$ represents the embedding weights for item $i$
 
 $$
-\begin{aligned}
 W = \begin{pmatrix}
 - & v^1 & - & \quad \text{item 1 embedding weights} \\
 - & v^2 & - & \quad \text{item 2 embedding weights} \\
 & \vdots & \\
 - & v^{|V|} & - & \quad \text{item |V| embedding weights}
 \end{pmatrix} \quad \in \mathbb{R}^{|V| \times d_m}
-\end{aligned}
 $$
 
 ### Computing Item Embeddings

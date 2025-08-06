@@ -76,7 +76,7 @@ PE(pos, 2i+1) &= \cos(pos/10000^{2i/d}) & \text{for odd dimensions}
 
 This creates a positional encoding matrix $PE \in \mathbb{R}^{n \times d_m}$:
 
-$$
+```math
 \begin{aligned}
 PE = \begin{pmatrix}
 - & pe_1 & - & \quad \text{position 1 encoding} \\
@@ -84,7 +84,7 @@ PE = \begin{pmatrix}
 - & pe_n & - & \quad \text{position n encoding}
 \end{pmatrix} \quad \in \mathbb{R}^{n \times d_m}
 \end{aligned}
-$$
+```
 
 The final input to the self-attention layer abusing notation is $E = E + PE$, which combines both item features and position information.
 

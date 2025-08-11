@@ -22,6 +22,7 @@ black = "*"
 matplotlib = "*"
 kaleido = "0.2.1"
 pyarrow = "*"
+jupyterlab-rise = "^0.43.1"
 
 [build-system]
 requires = ["poetry-core"]

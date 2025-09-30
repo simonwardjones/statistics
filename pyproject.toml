@@ -23,6 +23,10 @@ matplotlib = "*"
 kaleido = "0.2.1"
 pyarrow = "*"
 jupyterlab-rise = "^0.43.1"
+jupyterlab-widgets = "^3.0.15"
+seaborn = "^0.13.2"
+tensorflow-macos = "^2.16.2"
+tensorflow-metal = "^1.2.0"
 
 [build-system]
 requires = ["poetry-core"]
